@@ -1,6 +1,7 @@
-import Image from 'next/image'
-import { fontMono } from '@/config/fonts'
 import clsx from 'clsx'
+import Image from 'next/image'
+
+import { fontMono } from '@/config/fonts'
 
 export default function Home() {
   return (
