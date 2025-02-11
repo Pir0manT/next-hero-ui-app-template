@@ -1,10 +1,19 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Шаблон для создания приложений на Next.js + HeroUI
+
+Это шаблон для быстрого создания новых приложений на [Next.js](https://nextjs.org) и  [HeroUI](https://www.heroui.com/?utm_source=next-app-template). Шаблон включает базовую настройку и конфигурацию для удобного старта.
+
+## Как начать
+
+Чтобы создать новое приложение из этого шаблона, выполните следующую команду:
+
+```bash
+npx create-next-app my-app --example "https://github.com/Pir0manT/next-hero-ui-app-template"
+````
 
 ## Getting Started
 
 First, run the development server:
-
-```bash
+````bash
 npm run dev
 # or
 yarn dev
