@@ -24,6 +24,7 @@ import {
   TwitterIcon,
 } from '@/components/icons'
 import { ThemeSwitch } from '@/components/theme-switch'
+import { SidebarTrigger } from '@/components/ui/sidebar'
 import { siteConfig } from '@/config/site'
 
 export const Navbar = () => {
@@ -51,6 +52,8 @@ export const Navbar = () => {
   return (
     <HeroUINavbar maxWidth="2xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
+        <SidebarTrigger className="-ml-1" />
+        {/*<Separator orientation="vertical" className=" h-4" />*/}
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
             <Logo />
