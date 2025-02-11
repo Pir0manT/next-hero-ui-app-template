@@ -1,6 +1,7 @@
 'use client'
 
 import { SwitchProps, useSwitch } from '@heroui/switch'
+import { Tooltip } from '@heroui/tooltip'
 import { useIsSSR } from '@react-aria/ssr'
 import { VisuallyHidden } from '@react-aria/visually-hidden'
 import clsx from 'clsx'
@@ -25,6 +26,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
 
   const {
     Component,
+    domRef,
     slots,
     isSelected,
     getBaseProps,
@@ -32,48 +34,51 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
     getWrapperProps,
   } = useSwitch({
     isSelected: theme === 'light' || isSSR,
-    'aria-label': `Switch to ${theme === 'light' || isSSR ? 'dark' : 'light'} mode`,
+    'aria-label': `${theme === 'light' || isSSR ? 'Темная' : 'Светлая'} тема`,
     onChange,
   })
 
   return (
-    <Component
-      {...getBaseProps({
-        className: clsx(
-          'px-px transition-opacity hover:opacity-80 cursor-pointer',
-          className,
-          classNames?.base
-        ),
-      })}
-    >
-      <VisuallyHidden>
-        <input {...getInputProps()} />
-      </VisuallyHidden>
-      <div
-        {...getWrapperProps()}
-        className={slots.wrapper({
-          class: clsx(
-            [
-              'w-auto h-auto',
-              'bg-transparent',
-              'rounded-lg',
-              'flex items-center justify-center',
-              'group-data-[selected=true]:bg-transparent',
-              '!text-default-500',
-              'pt-px',
-              'px-0',
-              'mx-0',
-            ],
-            classNames?.wrapper
+    <Tooltip content={`${theme === 'light' ? 'Темная' : 'Светлая'} тема`}>
+      <Component
+        {...getBaseProps({
+          className: clsx(
+            'px-px transition-opacity hover:opacity-80 cursor-pointer',
+            className,
+            classNames?.base
           ),
         })}
+        ref={domRef}
       >
-        {!isSelected || isSSR ? (
-          <SunFilledIcon size={22} />
-        ) : (
-          <MoonFilledIcon size={22} />
-        )}
-      </div>
-    </Component>
+        <VisuallyHidden>
+          <input {...getInputProps()} />
+        </VisuallyHidden>
+        <div
+          {...getWrapperProps()}
+          className={slots.wrapper({
+            class: clsx(
+              [
+                'w-auto h-auto',
+                'bg-transparent',
+                'rounded-lg',
+                'flex items-center justify-center',
+                'group-data-[selected=true]:bg-transparent',
+                '!text-default-500',
+                'pt-px',
+                'px-0',
+                'mx-0',
+              ],
+              classNames?.wrapper
+            ),
+          })}
+        >
+          {!isSelected || isSSR ? (
+            <SunFilledIcon size={22} />
+          ) : (
+            <MoonFilledIcon size={22} />
+          )}
+        </div>
+      </Component>
+    </Tooltip>
   )
 }
