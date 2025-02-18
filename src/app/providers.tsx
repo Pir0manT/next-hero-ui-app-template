@@ -6,9 +6,6 @@ import { useRouter } from 'next/navigation'
 import type { ThemeProviderProps } from 'next-themes'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import * as React from 'react'
-import { useEffect, useState } from 'react'
-
-import { SidebarProvider } from '@/components/ui/sidebar'
 
 function createCalendar(identifier: SupportedCalendars) {
   switch (identifier) {
@@ -34,15 +31,6 @@ declare module '@react-types/shared' {
 
 export function Providers({ children, themeProps }: ProvidersProps) {
   const router = useRouter()
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(() => {
-    const storedValue = localStorage.getItem('sidebarOpen')
-
-    return storedValue === 'true' || storedValue === null // По умолчанию true
-  })
-
-  useEffect(() => {
-    localStorage.setItem('sidebarOpen', String(isSidebarOpen))
-  }, [isSidebarOpen])
 
   return (
     <HeroUIProvider
@@ -50,11 +38,7 @@ export function Providers({ children, themeProps }: ProvidersProps) {
       locale={'ru-ru'}
       navigate={router.push}
     >
-      <NextThemesProvider {...themeProps}>
-        <SidebarProvider open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
-          {children}
-        </SidebarProvider>
-      </NextThemesProvider>
+      <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
     </HeroUIProvider>
   )
 }
